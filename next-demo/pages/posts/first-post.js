@@ -1,4 +1,6 @@
 import Link from "next/dist/client/link";
+import Image from "next/dist/client/image";
+import pic from "../../public/images/profile.jpg"
 
 export default function FirstPost (){
     return (
@@ -8,6 +10,8 @@ export default function FirstPost (){
          
           <a> Back to Home</a>
         </Link>
+        {/* image component */}
+        <Image src={pic}  alt="Your Name"/>
       </>
     );  
 }
