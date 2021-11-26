@@ -61,6 +61,16 @@ export default function Home() {
               <a>Click here for second post</a>
             </Link>
           </h1>
+          <h1>
+            <Link href="/posts/third-post">
+              <a> Click here to visit the third post page</a>
+            </Link>
+          </h1>
+          <h1>
+            <Link href="/posts/fourth-post">
+              <a> Click here to visit the fourth post page</a>
+            </Link>
+          </h1>
         </div>
       </main>
 
