@@ -1,18 +1,11 @@
-//capture the segments
+
 import {useRouter} from "next/router"
+export default function HomePage(){
 
-function docs() {
-    const Router = useRouter();
-    //destructre params passed 
-    const {params=[]} = Router.query
-    console.log(params)
+    const Router = useRouter()
+    //set it to an empty array to catch any possible errors
 
-    return (
-        <div>
-            <h1> This is the docs homepage, we are using the params {params}</h1>
-            
-        </div>
-    )
+    const {params = []} = Router.query
+
+    return <h1> This is the catch all route feature in next js, it follows similar approach to destructuring. The parameter that we passed in URl is {params[0]} { " "} {params[1]}</h1>
 }
-
-export default docs
