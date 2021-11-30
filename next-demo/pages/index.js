@@ -2,8 +2,20 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function Home() {
+const Router = useRouter();
+
+  //handleClick functiion
+  const handleClick = ()=>{
+    alert("Order placement successful")
+    //to navigate programmatically
+    //using replace instead of push will distroy the navigation history when trying to navigate to the previous page
+    Router.replace('/product/100')
+
+
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -13,65 +25,11 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Learn <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <h1 className="title">
-            <Link href="/posts/first-post">
-              <a> First Post Page</a>
-            </Link>
-          </h1>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-          <h1>
-            <Link href="/posts/second-post">
-              <a>Click here for second post</a>
-            </Link>
-          </h1>
-          <h1>
-            <Link href="/posts/third-post">
-              <a> Click here to visit the third post page</a>
-            </Link>
-          </h1>
-          <h1>
-            <Link href="/posts/fourth-post">
-              <a> Click here to visit the fourth post page</a>
-            </Link>
-          </h1>
-        </div>
+      <h1> Home page</h1>
+      <Link href="/product">
+        <a>Products</a>
+      </Link>
+      <button onClick={handleClick}>Place Order</button>
       </main>
 
       <footer className={styles.footer}>
