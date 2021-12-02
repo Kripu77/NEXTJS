@@ -14,7 +14,7 @@ function List({list}) {
                 <div key={list.id}>
                     <h1>{list.title}</h1>
                     <hr></hr>
-                    <h3>{list.completed}</h3>
+                    <h3>Completed: {list.completed}</h3>
 
                 </div>
                 
