@@ -1,4 +1,5 @@
-function Post(post) {
+function Post({post}) {
+    console.log(post)
     return (
       <div>
         <h1> {post.title} </h1>
@@ -10,12 +11,30 @@ function Post(post) {
 
 export default Post
 
-//we want to pre-render the data so instead of useEffect we will use getStaticProps
-export async function getStaticProps({id}){
-    const{params} = id
+//getStatic paths is also an async functions which also contains an object
+export async function getStaticPaths(){
+    return {
+        paths:[
+            {
+                params:{postID:'1'}
+            }, {
+                params:{postID:'2'}
+            },
+            {params:{postID:'3'},
+        }, 
+        {params:{postID:'4'}}
+        ],
+        fallback:false,
+    }
+}
 
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
-    const data = response.json()
+//we want to pre-render the data so instead of useEffect we will use getStaticProps
+export async function getStaticProps(id){
+    const{params} = id
+    console.log(params)
+
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.postID}`)
+    const data = await response.json()
 
     return{props:{
      post:data
