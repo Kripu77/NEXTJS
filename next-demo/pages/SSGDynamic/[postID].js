@@ -12,6 +12,7 @@ function Post({post}) {
 export default Post
 
 //getStatic paths is also an async functions which also contains an object
+//anyId mentioned outside of the getStatic paths will result in 404 no founed
 export async function getStaticPaths(){
     return {
         paths:[
