@@ -1,3 +1,5 @@
+import Link from "next/dist/client/link"
+
 function homepage() {
     return (
         <div>
