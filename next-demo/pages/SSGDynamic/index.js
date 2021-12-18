@@ -8,6 +8,7 @@ function Index({lists}) {
            <h1> Home page for SSG with Dynamic pattern</h1> 
            <h1> This page consist of list of posts.</h1>
            {
+            //    the data from the API
                lists.map((list)=>{
                    const {id, userId, title, body} = list
 
