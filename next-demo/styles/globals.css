@@ -26,6 +26,29 @@ a {
     margin-right: auto;
     
 }
+.App-logo {
+  height: 20vmin;
+  pointer-events: cursor;
+  
+
+  margin: auto auto ;
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 9s linear;
+  }
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 
 .navigationButtons a {
     padding: 10px;

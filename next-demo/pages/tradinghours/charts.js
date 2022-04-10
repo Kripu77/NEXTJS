@@ -1,4 +1,6 @@
 import React from 'react';
+import { useRouter } from "next/router";
+import Link from 'next/dist/client/link';
 import {
   Chart as ChartJS,
   LinearScale,
@@ -10,6 +12,7 @@ import {
   Tooltip,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
+
 
 ChartJS.register(
   LinearScale,
@@ -27,6 +30,14 @@ const labels = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturd
 
 export default function Charts ({apiData}) {
 
+
+ 
+  
+   const newData = apiData.filter(
+     (value) => value.ITEM_DESCRIPTION === "Port Macquarie"
+   );
+  console.log(newData[0].ITEM_DESCRIPTION)
+
      const data = {
        labels,
        datasets: [
@@ -37,13 +48,23 @@ export default function Charts ({apiData}) {
            borderWidth: 2,
            fill: false,
            data: [
-             parseInt("22:00PM") - parseInt("09:00AM"),
-             parseInt("22:00PM") - parseInt("09:00AM"),
-             parseInt("22:00PM") - parseInt("09:00AM"),
-             parseInt("22:00PM") - parseInt("09:00AM"),
-             parseInt("22:00PM") - parseInt("09:00AM"),
-             parseInt("22:00PM") - parseInt("09:00AM"),
-             parseInt("22:00PM") - parseInt("09:00AM"),
+             parseInt(newData[0].MONDAY_CLOSE_TIME) -
+               parseInt(newData[0].MONDAY_OPEN_TIME),
+             parseInt(newData[0].TUESDAY_CLOSE_TIME) -
+               parseInt(newData[0].TUESDAY_OPEN_TIME),
+             parseInt(newData[0].WEDNESDAY_CLOSE_TIME) -
+               parseInt(newData[0].WEDNESDAY_OPEN_TIME),
+             parseInt(newData[0].THURSDAY_CLOSE_TIME) -
+               parseInt(newData[0].THURSDAY_OPEN_TIME),
+             parseInt(newData[0].FRIDAY_CLOSE_TIME) -
+               parseInt(newData[0].FRIDAY_OPEN_TIME),
+
+             parseInt(newData[0].SATURDAY_CLOSE_TIME) -
+               parseInt(newData[0].SATURDAY_OPEN_TIME),
+             ,
+             parseInt(newData[0].SUNDAY_CLOSE_TIME) -
+               parseInt(newData[0].SUNDAY_OPEN_TIME),
+             
            ],
          },
 
@@ -52,13 +73,13 @@ export default function Charts ({apiData}) {
            label: "Open",
            backgroundColor: "green",
            data: [
-             parseInt("09:00AM"),
-             parseInt("09:00AM"),
-             parseInt("09:00AM"),
-             parseInt("09:00AM"),
-             parseInt("09:00AM"),
-             parseInt("09:00AM"),
-             parseInt("09:00AM"),
+             parseInt(newData[0].MONDAY_OPEN_TIME),
+             parseInt(newData[0].TUESDAY_OPEN_TIME),
+             parseInt(newData[0].WEDNESDAY_OPEN_TIME),
+             parseInt(newData[0].THURSDAY_OPEN_TIME),
+             parseInt(newData[0].FRIDAY_OPEN_TIME),
+             parseInt(newData[0].SATURDAY_OPEN_TIME),
+             parseInt(newData[0].SUNDAY_OPEN_TIME),
            ],
            borderColor: "white",
            borderWidth: 2,
@@ -68,22 +89,30 @@ export default function Charts ({apiData}) {
            label: "Close",
            backgroundColor: "red",
            data: [
-             parseInt("23:00PM"),
-             parseInt("22:00PM"),
-             parseInt("22:00AM"),
-             parseInt("22:00AM"),
-             parseInt("22:00AM"),
-             parseInt("22:00AM"),
-             parseInt("22:00AM"),
+             parseInt(newData[0].MONDAY_CLOSE_TIME),
+             parseInt(newData[0].TUESDAY_CLOSE_TIME),
+             parseInt(newData[0].WEDNESDAY_CLOSE_TIME),
+             parseInt(newData[0].THURSDAY_CLOSE_TIME),
+             parseInt(newData[0].FRIDAY_CLOSE_TIME),
+             parseInt(newData[0].SATURDAY_CLOSE_TIME),
+             parseInt(newData[0].SUNDAY_CLOSE_TIME),
            ],
          },
        ],
      };
-  return(
-  <div>
-    <Chart type="bar" data={data} />
-    <h1 style={{textAlign:'center'}}> Store Trading Hours For: Darlinghurst</h1>
-  </div>);
+
+     if(apiData===[]){
+       return <h1> Data is loading....</h1>
+     }
+  return (
+    <div style={{ textAlign: "center" }}>
+      <Chart type="bar" data={data} />
+      <h1> Is the store 24/7? <br>
+      </br>  {newData[0]._24_7}</h1>
+      <h1> Store Trading Hours For: {newData[0].ITEM_DESCRIPTION} </h1>
+      <Link href="/tradinghours"> Back to Home page</Link>
+    </div>
+  );
 }
 
 

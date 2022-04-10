@@ -1,16 +1,18 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
+import { useState } from "react";
 import Loading from "../Loading";
 import Charts from "./charts";
+import Link from "next/link";
 
 const data = ({ apiData }) => {
 
 
-     const [page, setPage] = React.useState(0);
-     const [dataPerPage, setDataPerPage] = React.useState(3);
-     const [ search, setSearch] = React.useState("")
-
-    
+     const [page, setPage] = useState(0);
+     const [dataPerPage, setDataPerPage] = useState(3);
+     const [ search, setSearch] = useState("")
+      
+ 
      //for search function
 
      const handleSearch = ()=>{
@@ -23,9 +25,13 @@ const data = ({ apiData }) => {
       const changePage = ({ selected }) => {
         setPage(selected);
       };
+      if (apiData.length === 0) {
+        return <h1> Data is loading....</h1>;
+      }
 
   return (
     <div>
+      <Link href="/tradinghours/charts">View Chart Data</Link>
       <h1> Total stores: {handleSearch().length}</h1>
       <input
         type="text"
@@ -34,6 +40,7 @@ const data = ({ apiData }) => {
         onChange={(e) => setSearch(e.target.value)}
       ></input>
       {handleSearch()
+        .sort((a, b) => a.ITEM_DESCRIPTION.localeCompare(b.ITEM_DESCRIPTION))
         .slice(numberOfDataShown, numberOfDataShown + dataPerPage)
         .map((value) => {
           console.log(value);
@@ -102,7 +109,6 @@ const data = ({ apiData }) => {
           activeClassName={"navigationActive"}
         />
       </div>
-  
     </div>
   );
 };
