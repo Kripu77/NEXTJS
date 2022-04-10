@@ -1,10 +1,15 @@
+import React from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Loading from './Loading'
 
 export default function Home() {
+
+  //check if data is still fetching 
+  const [loading, setLoading]= React.useState(false)
 const Router = useRouter();
 
   //handleClick functiion
@@ -16,6 +21,9 @@ const Router = useRouter();
 
 
   }
+  if(loading){
+    return <Loading/>
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -25,11 +33,7 @@ const Router = useRouter();
       </Head>
 
       <main className={styles.main}>
-      <h1> Home page</h1>
-      <Link href="/product">
-        <a>Products</a>
-      </Link>
-      <button onClick={handleClick}>Place Order</button>
+      <Link href="/tradinghours"> View Trading Hours</Link>
       </main>
 
       <footer className={styles.footer}>

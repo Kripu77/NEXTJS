@@ -14,3 +14,78 @@ a {
 * {
   box-sizing: border-box;
 }
+.navigationButtons {
+    max-width: 70vw;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.navigationButtons a {
+    padding: 10px;
+    margin: 8px;
+   
+    border-radius: 12px;
+   
+    border: 1px solid #282c34;
+    ;
+    color: #282c34;
+    ;
+    cursor: pointer;
+    background-color: white;
+}
+
+.navigationButtons a:hover {
+    color: white;
+    background-color: #394152;
+
+    transition: 0.9s all ease;
+}
+
+.navigationActive a {
+    color: white;
+    background-color:#282c34;
+    ;
+}
+
+.navigationDisabled a {
+    color: grey;
+   
+}
+table{
+    width: 55rem;
+    overflow-y: none;
+}
+.replace{
+    display: flex;
+    justify-content: space-between;
+}
+@media only screen and (max-width:680px) 
+{
+   
+    .navigationButtons{
+     width: 12rem;
+    }
+    .replace{
+        display: flex;
+        flex-direction: column!important;
+        padding: 3rem;
+       
+    } 
+    .replace h1{
+        font-size: 3rem;
+    }
+    .replace a{
+        font-size: 2rem;
+   
+    }
+    .replace button{
+        margin-top: 1rem;
+    }
+  }
