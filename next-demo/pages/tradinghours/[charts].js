@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from "next/router";
 import Link from 'next/dist/client/link';
+import Button from "@mui/material/Button";
 import {
   Chart as ChartJS,
   LinearScale,
@@ -30,11 +31,13 @@ const labels = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturd
 
 export default function Charts ({apiData}) {
 
+   const Router = useRouter();
+   const ID = Router.query.charts;
 
  
   
    const newData = apiData.filter(
-     (value) => value.ITEM_DESCRIPTION === "Port Macquarie"
+     (value) => value.ITEM_DESCRIPTION === ID
    );
   console.log(newData[0].ITEM_DESCRIPTION)
 
@@ -107,15 +110,33 @@ export default function Charts ({apiData}) {
   return (
     <div style={{ textAlign: "center" }}>
       <Chart type="bar" data={data} />
-      <h1> Is the store 24/7? <br>
-      </br>  {newData[0]._24_7}</h1>
+      <h1>
+        {" "}
+        Is the store 24/7? <br></br> {newData[0]._24_7}
+      </h1>
       <h1> Store Trading Hours For: {newData[0].ITEM_DESCRIPTION} </h1>
-      <Link href="/tradinghours"> Back to Home page</Link>
+      <Button variant="contained">
+        <Link href="/tradinghours"> Back to Home page</Link>
+      </Button>
     </div>
   );
 }
 
-
+export async function getStaticPaths() {
+  return {
+    paths: [
+      {
+        params: { charts: "Darlinghurst" },
+      },
+      {
+        params: { charts: "Albury" },
+      },
+      { params: { charts: "Aldinga" } },
+      { params: { charts: "Albany" } },
+    ],
+    fallback: false,
+  };
+}
 export async function getStaticProps() {
   const res = await fetch("http://localhost:3000/api/test/hello");
   const data = await res.json();

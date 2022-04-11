@@ -4,6 +4,16 @@ import { useState } from "react";
 import Loading from "../Loading";
 import Charts from "./charts";
 import Link from "next/link";
+import { Button, TextField } from "@mui/material";
+import { Box } from "@mui/system";
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
 
 const data = ({ apiData }) => {
 
@@ -31,14 +41,28 @@ const data = ({ apiData }) => {
 
   return (
     <div>
-      <Link href="/tradinghours/charts">View Chart Data</Link>
+      <Button variants="outlined">
+        <Link href="/tradinghours/charts">View Chart Data</Link>
+      </Button>
       <h1> Total stores: {handleSearch().length}</h1>
-      <input
-        type="text"
-        placeholder="search store"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      ></input>
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          id="outlined-basic"
+          label="Search"
+          variant="outlined"
+          type="text"
+          placeholder="search store"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />{" "}
+      </Box>
       {handleSearch()
         .sort((a, b) => a.ITEM_DESCRIPTION.localeCompare(b.ITEM_DESCRIPTION))
         .slice(numberOfDataShown, numberOfDataShown + dataPerPage)

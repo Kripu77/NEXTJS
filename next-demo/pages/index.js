@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Loading from './Loading'
+import { Button } from '@mui/material'
 
 export default function Home() {
 
@@ -33,7 +34,16 @@ const Router = useRouter();
       </Head>
 
       <main className={styles.main}>
-      <Link href="/tradinghours"> View Trading Hours</Link>
+        <img
+          src={
+            "https://www.hungryjacks.com.au/App_Themes/HJ/assets/images/HJLogo.svg"
+          }
+          className="App-logo"
+          alt="logo"
+        />
+        <Button variants="contained" color="success">
+          <Link href="/tradinghours"> View Trading Hours</Link>
+        </Button>
       </main>
 
       <footer className={styles.footer}>
